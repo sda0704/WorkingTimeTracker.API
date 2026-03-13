@@ -28,6 +28,17 @@ public class ProjectsRepository : IProjectsRepository
             .ToList();
         return projects;
     }
+        public async Task<Project?> GetById(Guid id)
+        {
+            var entity = await _context.Projects
+                .AsNoTracking()
+                .FirstOrDefaultAsync(b => b.Id == id);
+
+            if (entity == null) return null;
+
+            return Project.Create(entity.Id, entity.Title, entity.Code, entity.IsActive).Project;
+
+        }
 
     public async Task<Guid> Create(Project project)
     {
@@ -46,14 +57,14 @@ public class ProjectsRepository : IProjectsRepository
         return projectEntity.Id;
     }
 
-    public async Task<Guid?> Update(Guid id, string title, string code, bool isActive)
+    public async Task<bool> Update(Guid id, string title, string code, bool isActive)
     {
         var exists = await _context.Projects.AnyAsync(p => p.Id == id);
 
         if (!exists)
-            return null;
+            return false;
 
-        await _context.Projects
+        var rowsAffected = await _context.Projects
             .Where(b => b.Id == id)
             .ExecuteUpdateAsync(s => s
             .SetProperty(b => b.Title, b => title)
@@ -61,17 +72,17 @@ public class ProjectsRepository : IProjectsRepository
             .SetProperty(b => b.IsActive, b => isActive));
 
 
-        return id;
+        return rowsAffected > 0;
     }
 
 
-    public async Task<Guid> Delete(Guid id)
+    public async Task<bool> Delete(Guid id)
     {
-        await _context.Projects
+       var rowsAffected = await _context.Projects
             .Where(b => b.Id == id)
             .ExecuteDeleteAsync();
 
-        return id;
+        return rowsAffected > 0;
 
     }
 

@@ -5,8 +5,9 @@ namespace WorkingTimeTracker.DataAccess.Repositories
     public interface IProjectsRepository
     {
         Task<Guid> Create(Project project);
-        Task<Guid> Delete(Guid id);
+        Task<bool> Delete(Guid id);
         Task<List<Project>> Get();
-        Task<Guid?> Update(Guid id, string title, string code, bool isActive);
+        Task<Project?> GetById(Guid id);
+        Task<bool> Update(Guid id, string title, string code, bool isActive);
     }
 }

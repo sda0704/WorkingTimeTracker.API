@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="WorkingTimeTracker.API/WorkingTimeTracker.API.csproj" />
+  <Project Path="WorkingTimeTracker.Application/WorkingTimeTracker.Application.csproj" Id="c0bd365e-d70f-45e1-8044-3e493d5a940a" />
   <Project Path="WorkingTimeTracker.Core/WorkingTimeTracker.Core.csproj" />
   <Project Path="WorkingTimeTracker.DataAccess/WorkingTimeTracker.DataAccess.csproj" />
 </Solution>
