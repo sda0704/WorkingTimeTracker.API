@@ -4,7 +4,7 @@ namespace WorkingTimeTracker.Core.Models
 {
     public class Tasks
     {
-        public Tasks(Guid id, string title, bool isActive, Guid projectId)
+        private Tasks(Guid id, string title, bool isActive, Guid projectId)
         {
             Id = id;
             Title = title;

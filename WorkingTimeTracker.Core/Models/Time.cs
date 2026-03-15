@@ -5,7 +5,7 @@ namespace WorkingTimeTracker.Core.Models
     public class Time
     {
 
-        public Time(Guid id, Guid taskId, DateTime date, decimal hours, string description)
+        private Time(Guid id, Guid taskId, DateTime date, decimal hours, string description)
         {
             Id = id;
             TaskId = taskId;
