@@ -26,7 +26,7 @@ public class ProjectMapper
     public static Project ToDomain(UpdateProjectDTO dto, Guid id)
     {
         var (project, error) = Project.Create(
-            id: dto.Id,
+            id: id,
             title: dto.Title,
             code: dto.Code,
             isActive: dto.IsActive

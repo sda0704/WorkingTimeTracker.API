@@ -47,6 +47,26 @@ policy.AllowAnyOrigin()
 .AllowAnyMethod()
 .AllowAnyHeader());
 
+app.Use(async (context, next) =>
+{
+    try
+    {
+        await next();
+    }
+    catch(InvalidOperationException ex)
+    {
+        context.Response.StatusCode = 400;
+        context.Response.ContentType = "application/json";
+        await context.Response.WriteAsync($"{{\"message\": \"{ex.Message}\"}}");
+    }
+    catch(Exception ex)
+    {
+        context.Response.StatusCode=500;
+        context.Response.ContentType = "application/json";
+        await context.Response.WriteAsync($"{{\"message\": \"Внутренняя ошибка сервера\"}}");
+    }
+});
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

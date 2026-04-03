@@ -26,7 +26,7 @@ public class TimeEntryMapper
     public static Time ToDomain( UpdateTimeEntryDTO dto, Guid id)
     {
         var (time, error) = Time.Create(
-            id: Guid.NewGuid(),
+            id: id,
             taskId: dto.TaskId,
             date: dto.Date,
             hours: dto.Hours,
