@@ -63,7 +63,7 @@ app.Use(async (context, next) =>
     {
         context.Response.StatusCode=500;
         context.Response.ContentType = "application/json";
-        await context.Response.WriteAsync($"{{\"message\": \"Внутренняя ошибка сервера\"}}");
+        await context.Response.WriteAsync($"{{\"message\": \"Внутренняя ошибка сервера\"}}" );
     }
 });
 
